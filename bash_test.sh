@@ -15,4 +15,5 @@
 #SBATCH --time=50:00:30
 #
 ## Command(s) to run:
-echo "hello world"
+# echo "hello world"
+python python_script.py 15 100 25 25
