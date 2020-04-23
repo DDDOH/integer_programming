@@ -3,10 +3,10 @@
 #SBATCH --job-name=test
 #
 # Account:
-#SBATCH --account=account_name
+#SBATCH --account=zyzheng
 #
 # Partition:
-#SBATCH --partition=partition_name
+#SBATCH --partition=savio2
 #
 # Quality of Service:
 #SBATCH --qos=qos_name
