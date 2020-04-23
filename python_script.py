@@ -32,16 +32,16 @@ print('n_sensor: '+str(n_sensor))
 # %%
 old_data = True
 if old_data:
-    anchors = pd.read_excel('old_data/a0.xls', usecols = range(26), header=None, nrows=n_anchor) 
-    sensors = pd.read_excel('old_data/y0.xls', usecols = range(26), header=None, nrows=n_sensor)
-    dist = pd.read_excel('old_data/dist0.xls', usecols = range(n_sensor), header=None, nrows=n_anchor)
+    anchors = pd.read_excel('old_data/a0.xls', usecols = range(26), header=1, nrows=n_anchor) 
+    sensors = pd.read_excel('old_data/y0.xls', usecols = range(26), header=1, nrows=n_sensor)
+    dist = pd.read_excel('old_data/dist0.xls', usecols = range(n_sensor), header=1, nrows=n_anchor)
     sensor = sensors.values
     anchor = anchors.values
     distance = dist.values
 else:
-    anchors = pd.read_excel('a0.xls', usecols = range(26), header=1, nrows=n_anchor) 
-    sensors = pd.read_excel('y0.xls', usecols = range(26), header=1, nrows=n_sensor)
-    dist = pd.read_excel('dist0.xls', usecols = range(n_sensor), header=1, nrows=n_anchor)
+    anchors = pd.read_excel('a0.xls', usecols = range(26), header=None, nrows=n_anchor) 
+    sensors = pd.read_excel('y0.xls', usecols = range(26), header=None, nrows=n_sensor)
+    dist = pd.read_excel('dist0.xls', usecols = range(n_sensor), header=None, nrows=n_anchor)
     sensor = sensors.values
     anchor = anchors.values
     distance = dist.values
