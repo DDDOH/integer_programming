@@ -29,9 +29,12 @@ print('M: '+str(M))
 print('n_anchor: '+str(n_anchor))
 print('n_sensor: '+str(n_sensor))
 
-anchors = pd.read_excel('a0.xls', usecols = range(26), header=0, nrows=n_anchor) 
-sensors = pd.read_excel('y0.xls', usecols = range(26), header=0, nrows=n_sensor)
-dist = pd.read_excel('dist0.xls', usecols = range(n_sensor),nrows=n_anchor)
+
+
+
+anchors = pd.read_excel('a0.xls', usecols = range(26), header=None, nrows=n_anchor) 
+sensors = pd.read_excel('y0.xls', usecols = range(26), header=None, nrows=n_sensor)
+dist = pd.read_excel('dist0.xls', usecols = range(n_sensor), header=None, nrows=n_anchor)
 sensor = sensors.values
 anchor = anchors.values
 distance = dist.values
@@ -114,10 +117,11 @@ for j in range(J):
 
 
 
-t = round(time.time())
+t_start = round(time.time())
 obj = cp.Minimize(obj_exp)
 prob = cp.Problem(obj, constraints)
 prob.solve(solver=cp.MOSEK, verbose=True)
+t_end = round(time.time())
 
 
 
@@ -165,6 +169,16 @@ assert abs(np.sum(T.value) - rhs_value) < 1e-6
 
 
 
+np.savetxt(X=x.value, fname='result/t{} x result_K{} M{} n_anchor{} n_sensor{} duration{}.txt'.format(t_start, K, M, n_anchor, n_sensor, t_end - t_start))
+
+hat_y_value = np.zeros((J,2))
+for j in range(J):
+    hat_y_value[j,:] = names.get('hat_y_{}'.format(j)).value
+
+np.savetxt(X=hat_y_value, fname='result/t{} hat_y result_K{} M{} n_anchor{} n_sensor{} duration{}.txt'.format(t_start, K, M, n_anchor, n_sensor, t_end - t_start))
+
+
+
 
 plt.figure(figsize=(10,10))
 plt.scatter(x=anchor[:,0], y=anchor[:,1])
@@ -174,9 +188,5 @@ for i in range(I):
     for j in range(J):
         plt.scatter(x=names.get('hat_y_{}'.format(j)).value[0],
                     y=names.get('hat_y_{}'.format(j)).value[1],c='r')
-plt.savefig('result/result_K{} M{} n_anchor{} n_sensor{} t{}.pdf'.format(K, M, n_anchor, n_sensor, t))
-
-
-
-
+plt.savefig('result/t{} figure result_K{} M{} n_anchor{} n_sensor{} duration{}.pdf'.format(t_start, K, M, n_anchor, n_sensor, t_end - t_start))
 
