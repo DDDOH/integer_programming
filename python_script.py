@@ -15,19 +15,19 @@ names = locals()
 
 
 #parameter
-K=sys.argv[1]
-M=sys.argv[2]
+K=int(sys.argv[1])
+M=int(sys.argv[2])
 
 
 
-n_anchor = sys.argv[3]
-n_sensor = sys.argv[4]
+n_anchor = int(sys.argv[3])
+n_sensor = int(sys.argv[4])
 
 
 print('K: '+str(K))
-print('K: '+str(M))
-print('K: '+str(n_anchor))
-print('K: '+str(n_sensor))
+print('M: '+str(M))
+print('n_anchor: '+str(n_anchor))
+print('n_sensor: '+str(n_sensor))
 
 anchors = pd.read_excel('a0.xls', usecols = range(26), header=0, nrows=n_anchor) 
 sensors = pd.read_excel('y0.xls', usecols = range(26), header=0, nrows=n_sensor)
