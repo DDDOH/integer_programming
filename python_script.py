@@ -132,32 +132,44 @@ prob.solve(solver=cp.MOSEK, verbose=True)
 t_end = round(time.time())
 
 
-# %%
-violation = max([np.max(x.violation()) for x in constraints])
-print('max constraint violation: '+str(max([np.max(x.violation()) for x in constraints])))
+
+if prob.status not in ["infeasible", "unbounded"]:
+    # Otherwise, problem.value is inf or -inf, respectively.
+    print("Optimal value: %s" % prob.value)
+
+    violation = max([np.max(x.violation()) for x in constraints])
+    print('max constraint violation: '+str(max([np.max(x.violation()) for x in constraints])))
 
 
-# %%
-np.savetxt(X=x.value, fname='result/t{} x result_K{} M{} n_anchor{} n_sensor{} duration{} violation{}.txt'.format(t_start, K, M, n_anchor, n_sensor, t_end - t_start, violation))
 
-hat_y_value = np.zeros((J,2))
-for j in range(J):
-    hat_y_value[j,:] = names.get('hat_y_{}'.format(j)).value
+    np.savetxt(X=x.value, fname='result/t{} x result_K{} M{} n_anchor{} n_sensor{} duration{} violation{}.txt'.format(t_start, K, M, n_anchor, n_sensor, t_end - t_start, violation))
 
-np.savetxt(X=hat_y_value, fname='result/t{} hat_y result_K{} M{} n_anchor{} n_sensor{} duration{} violation{}.txt'.format(t_start, K, M, n_anchor, n_sensor, t_end - t_start, violation))
-
-
-# %%
-
-plt.figure(figsize=(10,10))
-plt.scatter(x=anchor[:,0], y=anchor[:,1])
-plt.scatter(x=sensor[:,0], y=sensor[:,1],c='k',s=150)
-
-for i in range(I):
+    hat_y_value = np.zeros((J,2))
     for j in range(J):
-        plt.scatter(x=names.get('hat_y_{}'.format(j)).value[0],
-                    y=names.get('hat_y_{}'.format(j)).value[1],c='r')
-plt.savefig('result/t{} figure result_K{} M{} n_anchor{} n_sensor{} duration{} violation{}.pdf'.format(t_start, K, M, n_anchor, n_sensor, t_end - t_start, violation))
+        hat_y_value[j,:] = names.get('hat_y_{}'.format(j)).value
+
+    np.savetxt(X=hat_y_value, fname='result/t{} hat_y result_K{} M{} n_anchor{} n_sensor{} duration{} violation{}.txt'.format(t_start, K, M, n_anchor, n_sensor, t_end - t_start, violation))
+
+
+
+
+    plt.figure(figsize=(10,10))
+    plt.scatter(x=anchor[:,0], y=anchor[:,1])
+    plt.scatter(x=sensor[:,0], y=sensor[:,1],c='k',s=150)
+
+    for i in range(I):
+        for j in range(J):
+            plt.scatter(x=names.get('hat_y_{}'.format(j)).value[0],
+                        y=names.get('hat_y_{}'.format(j)).value[1],c='r')
+    plt.savefig('result/t{} figure result_K{} M{} n_anchor{} n_sensor{} duration{} violation{}.pdf'.format(t_start, K, M, n_anchor, n_sensor, t_end - t_start, violation))
+
+
+
+else:
+    print("Problem status:"+prob.status)
+    
+
+ 
 
 
 # %%
