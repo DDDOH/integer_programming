@@ -126,10 +126,7 @@ t_end = round(time.time())
 
 # %%
 violation = max([np.max(x.violation()) for x in constraints])
-
-
-# %%
-violation
+print('max constraint violation: '+str(max([np.max(x.violation()) for x in constraints])))
 
 
 # %%
@@ -153,8 +150,6 @@ for i in range(I):
         plt.scatter(x=names.get('hat_y_{}'.format(j)).value[0],
                     y=names.get('hat_y_{}'.format(j)).value[1],c='r')
 plt.savefig('result/t{} figure result_K{} M{} n_anchor{} n_sensor{} duration{} violation{}.pdf'.format(t_start, K, M, n_anchor, n_sensor, t_end - t_start, violation))
-
-print('max constraint violation: '+str(max([np.max(x.violation()) for x in constraints])))
 
 
 # %%
