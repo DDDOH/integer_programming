@@ -8,19 +8,20 @@ import mosek
 import cvxpy as cp
 import matplotlib.pyplot as plt
 import time
-
+import sys
 
 names = locals()
 
 
+
 #parameter
-K=18
-M=100
+K=sys.argv[1]
+M=sys.argv[2]
 
 
 
-n_anchor = 20
-n_sensor = 10
+n_anchor = sys.argv[3]
+n_sensor = sys.argv[4]
 
 
 
