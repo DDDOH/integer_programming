@@ -1,6 +1,6 @@
-# To add a new cell, type ''
-# To add a new markdown cell, type ''
-
+# To add a new cell, type '# %%'
+# To add a new markdown cell, type '# %% [markdown]'
+# %%
 import pandas as pd
 import numpy as np
 import math
@@ -13,7 +13,7 @@ import sys
 names = locals()
 
 
-
+# %%
 #parameter
 K=int(sys.argv[1])
 M=int(sys.argv[2])
@@ -30,7 +30,7 @@ print('n_anchor: '+str(n_anchor))
 print('n_sensor: '+str(n_sensor))
 
 
-
+# %%
 
 anchors = pd.read_excel('a0.xls', usecols = range(26), header=None, nrows=n_anchor) 
 sensors = pd.read_excel('y0.xls', usecols = range(26), header=None, nrows=n_sensor)
@@ -40,22 +40,22 @@ anchor = anchors.values
 distance = dist.values
 
 
-
+# %%
 J = len(sensor[:,1])
 I = len(anchor[:,1])
 
-
+# %% [markdown]
 # add variable $\hat{y_{j}}$
 
-
+# %%
 for j in range(J):
     exec('hat_y_{} = cp.Variable(2)'.format(j))
     
 
-
+# %% [markdown]
 # add variable $\lambda_{ij}$
 
-
+# %%
 for i in range(I):
     for j in range(J):
         exec('lam_{}_{} = cp.Variable(2)'.format(i, j))
@@ -64,13 +64,13 @@ for i in range(I):
 v = cp.Variable((I,J))
 
 
-
+# %%
 x = cp.Variable(I, boolean=True)
 mu = cp.Variable((I,J))
 T = cp.Variable((I,J))
 
 
-
+# %%
 constraints = []
 
 constraints.append(cp.sum(x) == K)
@@ -116,7 +116,7 @@ for j in range(J):
     
 
 
-
+# %%
 t_start = round(time.time())
 obj = cp.Minimize(obj_exp)
 prob = cp.Problem(obj, constraints)
@@ -124,61 +124,25 @@ prob.solve(solver=cp.MOSEK, verbose=True)
 t_end = round(time.time())
 
 
-
-assert np.sum(x.value) == K
-
-for i in range(I):
-    for j in range(J):
-        assert np.linalg.norm(names.get('lam_{}_{}'.format(i,j)).value) <= mu.value[i][j] + 1e-6
-        
-        
-assert (v.value >= 0).all
-
-for i in range(I):
-    for j in range(J):
-        assert abs(1 - distance[i][j]*mu.value[i][j] - v.value[i][j]) < 10e-6
-        
-for j in range(J):
-    sum_i_lam_ij_value = 0
-    for i in range(I):
-        sum_i_lam_ij_value += names.get('lam_{}_{}'.format(i,j)).value
-    assert (sum_i_lam_ij_value == 0).all
-    
-for i in range(I):
-    for j in range(J):
-        assert np.linalg.norm(anchor[i,:] - names.get('hat_y_{}'.format(j)).value) <=            distance[i][j]*(1+T.value[i][j]) + M*(1-x.value[i]) + 1e-6
-        
-#         assert np.linalg.norm(anchor[i,:] - sensor[j,:]) <=\
-#             distance[i][j]*(1+T.value[i][j]) + M*(1-x.value[i]) + 1e-10
-        
-        
-
-        
-for i in range(I):
-    for j in range(J):
-        assert mu.value[i][j] <= 100000*x.value[i] + 1e-7
-        
-
-rhs_value = 0
-for i in range(I):
-    for j in range(J):
-        rhs_value -= anchor[i,:].dot(names.get('lam_{}_{}'.format(i,j)).value) + distance[i][j]*mu.value[i][j]
-
-assert abs(np.sum(T.value) - rhs_value) < 1e-6
-        
+# %%
+violation = max([np.max(x.violation()) for x in constraints])
 
 
+# %%
+violation
 
-np.savetxt(X=x.value, fname='result/t{} x result_K{} M{} n_anchor{} n_sensor{} duration{}.txt'.format(t_start, K, M, n_anchor, n_sensor, t_end - t_start))
+
+# %%
+np.savetxt(X=x.value, fname='result/t{} x result_K{} M{} n_anchor{} n_sensor{} duration{} violation{}.txt'.format(t_start, K, M, n_anchor, n_sensor, t_end - t_start, violation))
 
 hat_y_value = np.zeros((J,2))
 for j in range(J):
     hat_y_value[j,:] = names.get('hat_y_{}'.format(j)).value
 
-np.savetxt(X=hat_y_value, fname='result/t{} hat_y result_K{} M{} n_anchor{} n_sensor{} duration{}.txt'.format(t_start, K, M, n_anchor, n_sensor, t_end - t_start))
+np.savetxt(X=hat_y_value, fname='result/t{} hat_y result_K{} M{} n_anchor{} n_sensor{} duration{} violation{}.txt'.format(t_start, K, M, n_anchor, n_sensor, t_end - t_start, violation))
 
 
-
+# %%
 
 plt.figure(figsize=(10,10))
 plt.scatter(x=anchor[:,0], y=anchor[:,1])
@@ -188,5 +152,47 @@ for i in range(I):
     for j in range(J):
         plt.scatter(x=names.get('hat_y_{}'.format(j)).value[0],
                     y=names.get('hat_y_{}'.format(j)).value[1],c='r')
-plt.savefig('result/t{} figure result_K{} M{} n_anchor{} n_sensor{} duration{}.pdf'.format(t_start, K, M, n_anchor, n_sensor, t_end - t_start))
+plt.savefig('result/t{} figure result_K{} M{} n_anchor{} n_sensor{} duration{} violation{}.pdf'.format(t_start, K, M, n_anchor, n_sensor, t_end - t_start, violation))
+
+print('max constraint violation: '+str(max([np.max(x.violation()) for x in constraints])))
+
+
+# %%
+# assert np.sum(x.value) == K
+
+# for i in range(I):
+#     for j in range(J):
+#         assert np.linalg.norm(names.get('lam_{}_{}'.format(i,j)).value) - mu.value[i][j] <= 1e-6
+        
+        
+# assert (v.value >= 0).all
+
+# for i in range(I):
+#     for j in range(J):
+#         assert abs(1 - distance[i][j]*mu.value[i][j] - v.value[i][j]) < 10e-6
+        
+# for j in range(J):
+#     sum_i_lam_ij_value = 0
+#     for i in range(I):
+#         sum_i_lam_ij_value += names.get('lam_{}_{}'.format(i,j)).value
+#     assert (sum_i_lam_ij_value == 0).all
+    
+# for i in range(I):
+#     for j in range(J):
+#         assert np.linalg.norm(anchor[i,:] - names.get('hat_y_{}'.format(j)).value) <=\
+#             distance[i][j]*(1+T.value[i][j]) + M*(1-x.value[i]) + 1e-6
+
+        
+# for i in range(I):
+#     for j in range(J):
+#         assert mu.value[i][j] <= 100000*x.value[i] + 1e-7
+        
+
+# rhs_value = 0
+# for i in range(I):
+#     for j in range(J):
+#         rhs_value -= anchor[i,:].dot(names.get('lam_{}_{}'.format(i,j)).value) + distance[i][j]*mu.value[i][j]
+
+# assert abs(np.sum(T.value) - rhs_value) < 1e-6
+        
 
