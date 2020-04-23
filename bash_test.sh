@@ -16,4 +16,5 @@
 #
 ## Command(s) to run:
 # echo "hello world"
+conda activate py3
 python python_script.py 15 100 25 25
