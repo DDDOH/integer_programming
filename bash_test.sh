@@ -12,7 +12,7 @@
 #SBATCH --qos=qos_name
 #
 # Wall clock limit:
-#SBATCH --time=00:00:30
+#SBATCH --time=50:00:30
 #
 ## Command(s) to run:
 echo "hello world"
