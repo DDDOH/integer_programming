@@ -24,7 +24,10 @@ n_anchor = sys.argv[3]
 n_sensor = sys.argv[4]
 
 
-
+print('K: '+str(K))
+print('K: '+str(M))
+print('K: '+str(n_anchor))
+print('K: '+str(n_sensor))
 
 anchors = pd.read_excel('a0.xls', usecols = range(26), header=0, nrows=n_anchor) 
 sensors = pd.read_excel('y0.xls', usecols = range(26), header=0, nrows=n_sensor)
