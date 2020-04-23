@@ -1,5 +1,5 @@
 # To add a new cell, type ''
-# To add a new markdown cell, type ' [markdown]'
+# To add a new markdown cell, type ''
 
 import pandas as pd
 import numpy as np
@@ -37,7 +37,7 @@ distance = dist.values
 J = len(sensor[:,1])
 I = len(anchor[:,1])
 
- [markdown]
+
 # add variable $\hat{y_{j}}$
 
 
@@ -45,7 +45,7 @@ for j in range(J):
     exec('hat_y_{} = cp.Variable(2)'.format(j))
     
 
- [markdown]
+
 # add variable $\lambda_{ij}$
 
 
