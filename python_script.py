@@ -21,8 +21,13 @@ M=int(sys.argv[2])
 
 n_anchor = int(sys.argv[3])
 n_sensor = int(sys.argv[4])
+# K = 15
+# M = 100
+# n_anchor = 25
+# n_sensor = 25
 
 
+# %%
 print('K: '+str(K))
 print('M: '+str(M))
 print('n_anchor: '+str(n_anchor))
@@ -32,9 +37,9 @@ print('n_sensor: '+str(n_sensor))
 # %%
 old_data = True
 if old_data:
-    anchors = pd.read_excel('old_data/a0.xls', usecols = range(26), header=1, nrows=n_anchor) 
-    sensors = pd.read_excel('old_data/y0.xls', usecols = range(26), header=1, nrows=n_sensor)
-    dist = pd.read_excel('old_data/dist0.xls', usecols = range(n_sensor), header=1, nrows=n_anchor)
+    anchors = pd.read_excel('old_data/a0.xls', usecols = range(26), header=0, nrows=n_anchor) 
+    sensors = pd.read_excel('old_data/y0.xls', usecols = range(26), header=0, nrows=n_sensor)
+    dist = pd.read_excel('old_data/dist0.xls', usecols = range(n_sensor), header=0, nrows=n_anchor)
     sensor = sensors.values
     anchor = anchors.values
     distance = dist.values
