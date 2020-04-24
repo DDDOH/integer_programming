@@ -1,0 +1,63 @@
+K: 23
+M: 100
+n_anchor: 25
+n_sensor: 25
+
+
+Problem
+  Name                   :                 
+  Objective sense        : min             
+  Type                   : CONIC (conic optimization problem)
+  Constraints            : 7034            
+  Cones                  : 1176            
+  Scalar variables       : 7656            
+  Matrix variables       : 0               
+  Integer variables      : 24              
+
+Optimizer started.
+Mixed integer optimizer started.
+Threads used: 24
+Presolve started.
+Presolve terminated. Time = 0.13
+Presolved problem: 4704 variables, 2930 constraints, 9816 non-zeros
+Presolved problem: 0 general integer, 24 binary, 4680 continuous
+Clique table size: 1
+BRANCHES RELAXS   ACT_NDS  DEPTH    BEST_INT_OBJ         BEST_RELAX_OBJ       REL_GAP(%)  TIME  
+0        1        1        0        NA                   2.3859908986e-10     NA          0.3   
+0        1        1        0        1.6335489256e+01     2.3859908986e-10     100.00      0.7   
+0        1        1        0        1.6333418343e+01     2.3859908986e-10     100.00      2.3   
+Cut generation started.
+0        1        1        0        1.6333418343e+01     2.3924903855e-10     100.00      2.4   
+Cut generation terminated. Time = 0.00
+5        9        2        2        1.6154437447e+01     2.0251175806e+00     87.46       3.8   
+17       21       4        9        1.6154437447e+01     5.3058561252e+00     67.16       6.2   
+29       33       4        15       1.6154437447e+01     5.3058561252e+00     67.16       8.0   
+41       45       4        21       1.6154437447e+01     5.3058561252e+00     67.16       9.7   
+43       47       4        22       1.5991215256e+01     5.3058561252e+00     66.82       9.9   
+An optimal solution satisfying the relative gap tolerance of 1.00e-02(%) has been located.
+The relative gap is 0.00e+00(%).
+An optimal solution satisfying the absolute gap tolerance of 0.00e+00 has been located.
+The absolute gap is 0.00e+00.
+
+Objective of best integer solution : 1.599121525605e+01      
+Best objective bound               : 1.599121525605e+01      
+Construct solution objective       : Not employed
+User objective cut value           : Not employed
+Number of cuts generated           : 0
+Number of branches                 : 47
+Number of relaxations solved       : 51
+Number of interior point iterations: 2073
+Number of simplex iterations       : 0
+Time spend presolving the root     : 0.13
+Time spend optimizing the root     : 0.28
+Mixed integer optimizer terminated. Time: 10.52
+
+Optimizer terminated. Time: 10.60   
+
+
+Integer solution solution summary
+  Problem status  : PRIMAL_FEASIBLE
+  Solution status : INTEGER_OPTIMAL
+  Primal.  obj: 1.5991215256e+01    nrm: 1e+05    Viol.  con: 1e-05    var: 0e+00    cones: 0e+00    itg: 0e+00  
+Optimal value: 15.991215256045217
+max constraint violation: 8.124157616862249e-06
