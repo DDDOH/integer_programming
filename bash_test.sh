@@ -3,7 +3,7 @@
 #SBATCH --job-name=test
 #
 # Account:
-#SBATCH --account=zyzheng
+#SBATCH --account=fc_nonsta
 #
 # Partition:
 #SBATCH --partition=savio2
