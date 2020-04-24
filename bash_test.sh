@@ -9,7 +9,7 @@
 #SBATCH --partition=savio2
 #
 # Quality of Service:
-#SBATCH --qos=qos_name
+#SBATCH --qos=savio_normal
 #
 # Wall clock limit:
 #SBATCH --time=50:00:30
