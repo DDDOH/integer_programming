@@ -19,7 +19,7 @@
 #
 ## Command(s) to run:
 # echo "hello world"
-conda init py3
+conda init bash
 conda activate py3
 python -u python_script.py 15 100 25 25 > K_15_M_100_n_anchor_25_n_sensor_25.txt
 python -u python_script.py 5 100 25 25 > K_5_M_100_n_anchor_25_n_sensor_25.txt
