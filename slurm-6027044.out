@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "python_script.py", line 4, in <module>
+    import pandas as pd
+ModuleNotFoundError: No module named 'pandas'

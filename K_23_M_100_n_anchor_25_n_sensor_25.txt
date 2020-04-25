@@ -1,0 +1,95 @@
+K: 23
+M: 100
+n_anchor: 25
+n_sensor: 25
+
+
+Problem
+  Name                   :                 
+  Objective sense        : min             
+  Type                   : CONIC (conic optimization problem)
+  Constraints            : 7627            
+  Cones                  : 1275            
+  Scalar variables       : 8300            
+  Matrix variables       : 0               
+  Integer variables      : 25              
+
+Optimizer started.
+Mixed integer optimizer started.
+Threads used: 24
+Presolve started.
+Presolve terminated. Time = 0.11
+Presolved problem: 5100 variables, 3177 constraints, 10650 non-zeros
+Presolved problem: 0 general integer, 25 binary, 5075 continuous
+Clique table size: 0
+BRANCHES RELAXS   ACT_NDS  DEPTH    BEST_INT_OBJ         BEST_RELAX_OBJ       REL_GAP(%)  TIME  
+0        1        1        0        NA                   3.6604018782e-09     NA          0.3   
+0        1        1        0        9.3380400588e-01     3.6604018782e-09     100.00      1.3   
+Cut generation started.
+0        1        1        0        9.3380400588e-01     3.5577970139e-09     100.00      4.2   
+Cut generation terminated. Time = 0.00
+8        12       5        2        9.3380400588e-01     3.8412585011e-08     100.00      6.1   
+21       25       8        8        9.3380400588e-01     3.8412585011e-08     100.00      9.0   
+32       36       11       11       9.3380400588e-01     3.8412585011e-08     100.00      11.3  
+47       51       18       14       9.3380400588e-01     3.8412585011e-08     100.00      13.0  
+62       66       25       16       9.3380400588e-01     3.8412585011e-08     100.00      14.1  
+82       86       31       18       9.3380400588e-01     3.8412585011e-08     100.00      15.5  
+94       98       35       19       9.3380400588e-01     3.8412585011e-08     100.00      16.4  
+107      111      32       20       9.3380400588e-01     3.8412585011e-08     100.00      17.3  
+120      124      35       21       9.3380400588e-01     3.8412585011e-08     100.00      18.3  
+132      136      41       22       9.3380400588e-01     3.8412585011e-08     100.00      19.0  
+147      151      42       23       9.3380400588e-01     3.8412585011e-08     100.00      19.6  
+164      168      43       24       9.3380400588e-01     3.8412585011e-08     100.00      20.6  
+181      185      42       6        9.2828951294e-01     3.8412585011e-08     100.00      21.5  
+197      201      48       2        9.2351647673e-01     4.0850915597e-08     100.00      22.1  
+225      229      60       3        9.2316383239e-01     4.0850915597e-08     100.00      23.0  
+265      269      62       4        9.2002554487e-01     4.0850915597e-08     100.00      24.4  
+305      309      40       5        9.1432612459e-01     6.6228700381e-08     100.00      25.5  
+322      326      35       17       9.1108119172e-01     6.6228700381e-08     100.00      26.2  
+335      339      32       15       9.1107678993e-01     6.6228700381e-08     100.00      28.4  
+348      352      25       5        9.1107678993e-01     6.6228700381e-08     100.00      29.3  
+360      364      23       8        9.1107678993e-01     6.6228700381e-08     100.00      29.8  
+377      381      20       20       9.1107678993e-01     6.6228700381e-08     100.00      31.3  
+392      396      27       22       9.1107678993e-01     6.6228700381e-08     100.00      32.9  
+413      417      24       10       9.1107678993e-01     6.6228700381e-08     100.00      34.5  
+431      435      18       12       9.1107678993e-01     6.6228700381e-08     100.00      35.8  
+444      448      15       14       9.1107678993e-01     6.6228700381e-08     100.00      37.3  
+455      459      16       16       9.1107678993e-01     2.3446497550e-07     100.00      38.6  
+467      471      14       18       9.1107678993e-01     2.3446497550e-07     100.00      40.0  
+482      486      11       21       9.1107678993e-01     2.3446497550e-07     100.00      42.2  
+497      501      12       24       9.1107678993e-01     2.3446497550e-07     100.00      44.0  
+511      515      14       21       9.1107678993e-01     2.3446497550e-07     100.00      45.5  
+522      526      9        21       9.1107678993e-01     2.3446497550e-07     100.00      47.2  
+534      538      13       23       9.1107678993e-01     1.2207472326e-06     100.00      48.9  
+545      549      10       16       9.1107678993e-01     1.2207472326e-06     100.00      50.2  
+558      562      11       21       9.1107678993e-01     1.2207472326e-06     100.00      52.0  
+570      574      5        11       9.1107678993e-01     1.2207472326e-06     100.00      53.6  
+581      585      4        16       9.1107678993e-01     1.2207472326e-06     100.00      56.2  
+592      596      3        21       9.1107678993e-01     1.8232153546e-01     79.99       59.4  
+An optimal solution satisfying the relative gap tolerance of 1.00e-02(%) has been located.
+The relative gap is 0.00e+00(%).
+An optimal solution satisfying the absolute gap tolerance of 0.00e+00 has been located.
+The absolute gap is 0.00e+00.
+
+Objective of best integer solution : 9.110767899325e-01      
+Best objective bound               : 9.110767899325e-01      
+Construct solution objective       : Not employed
+User objective cut value           : Not employed
+Number of cuts generated           : 0
+Number of branches                 : 599
+Number of relaxations solved       : 603
+Number of interior point iterations: 26880
+Number of simplex iterations       : 0
+Time spend presolving the root     : 0.11
+Time spend optimizing the root     : 0.28
+Mixed integer optimizer terminated. Time: 62.18
+
+Optimizer terminated. Time: 62.33   
+
+
+Integer solution solution summary
+  Problem status  : PRIMAL_FEASIBLE
+  Solution status : INTEGER_OPTIMAL
+  Primal.  obj: 9.1107678993e-01    nrm: 1e+05    Viol.  con: 2e-05    var: 0e+00    cones: 0e+00    itg: 0e+00  
+Optimal value: 0.9110767899324617
+max constraint violation: 7.294281766490052e-06
